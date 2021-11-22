@@ -1,7 +1,7 @@
+
 var PLAY = 1;
 var END = 0;
 var gameState = PLAY;
-
 var bow , arrow,  background, redB, pinkB, greenB ,blueB ,arrowGroup;
 var bowImage, arrowImage, green_balloonImage, red_balloonImage, pink_balloonImage ,blue_balloonImage, backgroundImage;
 
@@ -30,28 +30,33 @@ function setup() {
   scene.scale = 2.5
   
   // criando arco para a flecha
+
   bow = createSprite(380,220,20,50);
   bow.addImage(bowImage); 
   bow.scale = 1;
   
    score = 0  
- redB= new Group();
- 
+  redB= new Group();
+  greenB= new Group();
+  blueB= new Group();
+  pinkB= new Group();
+  
   arrowGroup= new Group();
-
+ 
   
 }
 
 function draw() {
  background(0);
-if (gameState = PLAY){
-// solo em movimento
+ if(gameState === PLAY){
+
+  // chão em movimento
     scene.velocityX = -3 
-    
+
     if (scene.x < 0){
       scene.x = scene.width/2;
-   }
-  }
+    }
+  
   //arco em movimento
   bow.y = World.mouseY
   
@@ -86,19 +91,34 @@ if (gameState = PLAY){
 
 }
  
-if (gameState === END)
+  if (gameState === END) {
   bow.destroy();
   scene.velocityX = 0;
- 
-
-
-
-
+}
 
  
+if (greenB.isTouching(arrowGroup)) 
+  greenB.destroyEach();
+  arrowGroup.destroyEach(); 
+  score =+ 3;
+
+
+
+if (blueB.isTouching(arrowGroup)) 
+  blueB.destroyEach();
+  arrowGroup.destroyEach(); 
+  score =+ 2;
+
+
+if (pinkB.isTouching(arrowGroup)) 
+  pinkB.destroyEach();
+  arrowGroup.destroyEach(); 
+  score =+ 1;
+
+ }
   
   drawSprites();
- text("Pontuação" + score);
+  text("Pontuação: "+ score, 300,50);
 }
 
 
@@ -117,6 +137,7 @@ function blueBalloon() {
   blue.velocityX = 3;
   blue.lifetime = 150;
   blue.scale = 0.1;
+  blueB.add(blue);
 }
 
 function greenBalloon() {
@@ -125,6 +146,7 @@ function greenBalloon() {
   green.velocityX = 3;
   green.lifetime = 150;
   green.scale = 0.1;
+  greenB.add(green);
 }
 
 function pinkBalloon() {
@@ -133,8 +155,9 @@ function pinkBalloon() {
   pink.velocityX = 3;
   pink.lifetime = 150;
   pink.scale = 1
-
+  pinkB.add(pink);
 }
+
 
 // Criar flechas para o arco
  function createArrow() {
@@ -146,5 +169,5 @@ function pinkBalloon() {
   arrow.lifetime = 100;
   arrow.scale = 0.3;
   arrowGroup.add(arrow);
-
+   
 }
