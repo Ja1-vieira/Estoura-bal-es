@@ -97,24 +97,24 @@ function draw() {
 }
 
  
-if (greenB.isTouching(arrowGroup)) 
+if (greenB.isTouching(arrowGroup)) {
   greenB.destroyEach();
   arrowGroup.destroyEach(); 
-  score =+ 3;
+  score += 3;
+}
 
 
-
-if (blueB.isTouching(arrowGroup)) 
+if (blueB.isTouching(arrowGroup)) {
   blueB.destroyEach();
   arrowGroup.destroyEach(); 
-  score =+ 2;
+  score += 2;
+}
 
-
-if (pinkB.isTouching(arrowGroup)) 
+if (pinkB.isTouching(arrowGroup)) {
   pinkB.destroyEach();
   arrowGroup.destroyEach(); 
-  score =+ 1;
-
+  score += 1;
+}
  }
   
   drawSprites();
